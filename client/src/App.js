@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import SelectedFoods from "./SelectedFoods";
-import FoodSearch from "./FoodSearch";
+import SelectedFoods from "./components/SelectedFoods";
+import FoodSearch from "./components/FoodSearch";
+import Layout from "./components/Layout";
 
 class App extends Component {
   state = {
@@ -23,15 +24,17 @@ class App extends Component {
     const { selectedFoods } = this.state;
 
     return (
-      <div className="App">
-        <div className="ui text container">
-          <SelectedFoods
-            foods={selectedFoods}
-            onFoodClick={this.removeFoodItem}
-          />
+      <Layout>
+        <div className="App">
+          <div className="ui text container">
           <FoodSearch onFoodClick={this.addFood} />
+            <SelectedFoods
+              foods={selectedFoods}
+              onFoodClick={this.removeFoodItem}
+            />
+          </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 }
