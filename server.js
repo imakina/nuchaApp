@@ -15,6 +15,19 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+  host     : '192.168.10.10',
+  user     : 'root',
+  password : 'root',
+  database : 'afsnextdb'
+});
+
+connection.connect((err) => {
+  if (err) throw err;
+  console.log('mySQL Connected!');
+});
+
 const COLUMNS = [
   'carbohydrate_g',
   'protein_g',
@@ -63,6 +76,32 @@ app.get('/api/food', (req, res) => {
   } else {
     res.json([]);
   }
+});
+
+app.get('/api/productos/search', (req,res) => {
+  
+  const param = req.query.q;
+  const sqlquery = "SELECT * FROM producto where descripcion like '%"+param+"%'"
+  //console.log(sqlquery)
+
+  connection.query(sqlquery, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+
+});
+
+app.get('/api/pedido', (req,res) => {
+  
+  const param = req.query.q;
+  const sqlquery = "SELECT * FROM producto where descripcion like '%"+param+"%'"
+  //console.log(sqlquery)
+
+  connection.query(sqlquery, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+
 });
 
 app.listen(app.get('port'), () => {

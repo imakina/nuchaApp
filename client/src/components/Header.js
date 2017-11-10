@@ -6,13 +6,13 @@ const linkStyle = {
 }
 
 const LinkGoAbout = () => {
-  
+
 }
 
 const Header = () => (
     <div>
         {/* <Link href="/"> */}
-          <a href="/" style={linkStyle}>Home</a>
+          <a href="/admin.html" style={linkStyle}>Home</a>
         {/* </Link> */}
         {/* <Link href="/about"> */}
         <button onClick={LinkGoAbout} style={linkStyle}>About</button>

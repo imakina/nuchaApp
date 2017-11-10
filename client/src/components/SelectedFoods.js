@@ -3,13 +3,13 @@ import React from "react";
 export default function SelectedFoods(props) {
   const { foods } = props;
 
-  const foodRows = foods.map((food, idx) => (
+  const foodRows = foods.map((producto, idx) => (
     <tr key={idx} onClick={() => props.onFoodClick(idx)}>
-      <td>{food.description}</td>
-      <td className="right aligned">{food.kcal}</td>
-      <td className="right aligned">{food.protein_g}</td>
-      <td className="right aligned">{food.fat_g}</td>
-      <td className="right aligned">{food.carbohydrate_g}</td>
+      <td>{producto.descripcion}</td>
+      <td className="right aligned">{producto.codigo}</td>
+      <td className="right aligned">{producto.precio}</td>
+      <td className="right aligned"></td>
+      <td className="right aligned"></td>
     </tr>
   ));
 
@@ -22,11 +22,11 @@ export default function SelectedFoods(props) {
           </th>
         </tr>
         <tr>
-          <th className="eight wide">Description</th>
-          <th>Kcal</th>
-          <th>Protein (g)</th>
-          <th>Fat (g)</th>
-          <th>Carbs (g)</th>
+          <th className="eight wide">Descripcion</th>
+          <th>Codigo</th>
+          <th>Precio</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -39,7 +39,7 @@ export default function SelectedFoods(props) {
             {sum(foods, "kcal")}
           </th>
           <th className="right aligned" id="total-protein_g">
-            {sum(foods, "protein_g")}
+            {sum(foods, "precio")}
           </th>
           <th className="right aligned" id="total-fat_g">
             {sum(foods, "fat_g")}

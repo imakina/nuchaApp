@@ -8,6 +8,25 @@ function search(query, cb) {
     .then(cb);
 }
 
+function productos(query, cb) {
+  return fetch(`api/productos/search?q=${query}`, {
+    accept: "application/json"
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
+function pedido(query, cb) {
+  return fetch(`api/pedido`, {
+    method: "POST",
+    body: query
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -24,5 +43,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search };
+const Client = { search, productos };
 export default Client;

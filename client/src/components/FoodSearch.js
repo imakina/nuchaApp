@@ -27,11 +27,18 @@ class FoodSearch extends React.Component {
         showRemoveIcon: true
       });
 
-      Client.search(value, foods => {
+      // Client.search(value, foods => {
+      //   this.setState({
+      //     foods: foods.slice(0, MATCHING_ITEM_LIMIT)
+      //   });
+      // });
+
+      Client.productos(value, foods => {
         this.setState({
           foods: foods.slice(0, MATCHING_ITEM_LIMIT)
         });
       });
+
     }
   };
 
@@ -48,12 +55,16 @@ class FoodSearch extends React.Component {
     const removeIconStyle = showRemoveIcon ? {} : { visibility: "hidden" };
 
     const foodRows = foods.map((food, idx) => (
-      <tr key={idx} onClick={() => this.props.onFoodClick(food)}>
-        <td>{food.description}</td>
-        <td className="right aligned">{food.kcal}</td>
-        <td className="right aligned">{food.protein_g}</td>
-        <td className="right aligned">{food.fat_g}</td>
-        <td className="right aligned">{food.carbohydrate_g}</td>
+      <tr key={idx}>
+        <td>{food.descripcion}</td>
+        <td className="right aligned">{food.codigo}</td>
+        <td className="right aligned">{food.precio}</td>
+        <td className="right aligned"><input type='text'></input></td>
+        <td className="right aligned">
+            <button
+            className="btn btn-default"
+            onClick={() => this.props.onFoodClick(food)}>ok</button>
+        </td>
       </tr>
     ));
 
@@ -62,7 +73,7 @@ class FoodSearch extends React.Component {
         <table className="ui selectable structured large table">
           <thead>
             <tr>
-              <th colSpan="5">
+              <th colSpan="7">
                 <div className="ui fluid search">
                   <div className="ui icon input">
                     <input
@@ -83,11 +94,11 @@ class FoodSearch extends React.Component {
               </th>
             </tr>
             <tr>
-              <th className="eight wide">Description</th>
-              <th>Kcal</th>
-              <th>Protein (g)</th>
-              <th>Fat (g)</th>
-              <th>Carbs (g)</th>
+              <th className="eight wide">Descripcion</th>
+              <th>Codigo</th>
+              <th>Precio</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

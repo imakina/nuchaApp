@@ -27,11 +27,11 @@ class App extends Component {
       <Layout>
         <div className="App">
           <div className="ui text container">
-          <FoodSearch onFoodClick={this.addFood} />
             <SelectedFoods
               foods={selectedFoods}
               onFoodClick={this.removeFoodItem}
             />
+            <FoodSearch onFoodClick={this.addFood} />
           </div>
         </div>
       </Layout>
