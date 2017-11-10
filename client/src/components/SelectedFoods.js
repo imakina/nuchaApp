@@ -8,8 +8,8 @@ export default function SelectedFoods(props) {
       <td>{producto.descripcion}</td>
       <td className="right aligned">{producto.codigo}</td>
       <td className="right aligned">{producto.precio}</td>
-      <td className="right aligned"></td>
-      <td className="right aligned"></td>
+      <td className="right aligned">{producto.cantidad}</td>
+      <td className="right aligned">{producto.precio * producto.cantidad}</td>
     </tr>
   ));
 
@@ -25,8 +25,8 @@ export default function SelectedFoods(props) {
           <th className="eight wide">Descripcion</th>
           <th>Codigo</th>
           <th>Precio</th>
-          <th></th>
-          <th></th>
+          <th>Cantidad</th>
+          <th>Importe</th>
         </tr>
       </thead>
       <tbody>
@@ -36,16 +36,16 @@ export default function SelectedFoods(props) {
         <tr>
           <th>Total</th>
           <th className="right aligned" id="total-kcal">
-            {sum(foods, "kcal")}
+            
           </th>
           <th className="right aligned" id="total-protein_g">
             {sum(foods, "precio")}
           </th>
           <th className="right aligned" id="total-fat_g">
-            {sum(foods, "fat_g")}
+            {sum(foods, "cantidad")}
           </th>
-          <th className="right aligned" id="total-carbohydrate_g">
-            {sum(foods, "carbohydrate_g")}
+          <th className="right aligned" id="total-fat_g">
+            
           </th>
         </tr>
       </tfoot>

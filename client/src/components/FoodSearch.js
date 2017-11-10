@@ -50,6 +50,13 @@ class FoodSearch extends React.Component {
     });
   };
 
+  onChangeCantidad = e => {
+    var localfoods = this.state.foods.slice();    
+    localfoods[e.target.id].cantidad = e.target.value  
+    this.setState({foods:localfoods})
+    console.log(localfoods)
+  }
+
   render() {
     const { showRemoveIcon, foods } = this.state;
     const removeIconStyle = showRemoveIcon ? {} : { visibility: "hidden" };
@@ -59,7 +66,9 @@ class FoodSearch extends React.Component {
         <td>{food.descripcion}</td>
         <td className="right aligned">{food.codigo}</td>
         <td className="right aligned">{food.precio}</td>
-        <td className="right aligned"><input type='text'></input></td>
+        <td className="right aligned">
+          <input type='text' id={idx} onChange={this.onChangeCantidad}/>
+        </td>
         <td className="right aligned">
             <button
             className="btn btn-default"
@@ -73,7 +82,7 @@ class FoodSearch extends React.Component {
         <table className="ui selectable structured large table">
           <thead>
             <tr>
-              <th colSpan="7">
+              <th colSpan="5">
                 <div className="ui fluid search">
                   <div className="ui icon input">
                     <input
