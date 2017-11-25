@@ -1,12 +1,18 @@
 const express = require('express');
 const fs = require('fs');
 const sqlite = require('sql.js');
+var bodyParser = require('body-parser')
 
 const filebuffer = fs.readFileSync('db/usda-nnd.sqlite3');
 
 const db = new sqlite.Database(filebuffer);
 
 const app = express();
+
+// create application/json parser
+var jsonParser = bodyParser.json()
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.set('port', (process.env.PORT || 3001));
 
@@ -37,6 +43,7 @@ const COLUMNS = [
   'kcal',
   'description',
 ];
+
 app.get('/api/food', (req, res) => {
   const param = req.query.q;
 
@@ -91,16 +98,18 @@ app.get('/api/productos/search', (req,res) => {
 
 });
 
-app.get('/api/pedido', (req,res) => {
-  
-  const param = req.query.q;
-  const sqlquery = "SELECT * FROM producto where descripcion like '%"+param+"%'"
-  //console.log(sqlquery)
+app.post('/api/pedido', jsonParser,  (req,res) => {
 
-  connection.query(sqlquery, function (error, results, fields) {
-    if (error) throw error;
-    res.json(results);
-  });
+  if (!req.body) return res.sendStatus(400)
+
+  console.log(req.body)
+  
+  // connection.query(sqlquery, function (error, results, fields) {
+  //   if (error) throw error;
+  //   res.json(results);
+  // });
+
+  res.json("make it");
 
 });
 

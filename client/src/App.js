@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SelectedFoods from "./components/SelectedFoods";
 import FoodSearch from "./components/FoodSearch";
 import Layout from "./components/Layout";
+import Client from "./components/Client";
 
 class App extends Component {
   state = {
@@ -20,6 +21,12 @@ class App extends Component {
     this.setState({ selectedFoods: newFoods });
   };
 
+  confirmPedido = () => {
+    Client.pedido(this.state.selectedFoods, message => {
+      alert(message);
+    });
+  }
+
   render() {
     const { selectedFoods } = this.state;
 
@@ -30,6 +37,7 @@ class App extends Component {
             <SelectedFoods
               foods={selectedFoods}
               onFoodClick={this.removeFoodItem}
+              onPedidoClick={this.confirmPedido}
             />
             <FoodSearch onFoodClick={this.addFood} />
           </div>

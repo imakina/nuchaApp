@@ -54,7 +54,7 @@ class FoodSearch extends React.Component {
     var localfoods = this.state.foods.slice();    
     localfoods[e.target.id].cantidad = e.target.value  
     this.setState({foods:localfoods})
-    console.log(localfoods)
+    // console.log(localfoods)
   }
 
   render() {
@@ -67,7 +67,15 @@ class FoodSearch extends React.Component {
         <td className="right aligned">{food.codigo}</td>
         <td className="right aligned">{food.precio}</td>
         <td className="right aligned">
-          <input type='text' id={idx} onChange={this.onChangeCantidad}/>
+          <div className="ui fluid search">
+            <input 
+                className="input right aligned ui" 
+                type='text' 
+                id={idx} 
+                placeholder="0"
+                onChange={this.onChangeCantidad}
+              />
+          </div>
         </td>
         <td className="right aligned">
             <button

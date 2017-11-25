@@ -17,10 +17,14 @@ function productos(query, cb) {
     .then(cb);
 }
 
-function pedido(query, cb) {
+function pedido(foods, cb) {
   return fetch(`api/pedido`, {
     method: "POST",
-    body: query
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(foods)
   })
     .then(checkStatus)
     .then(parseJSON)
@@ -43,5 +47,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, productos };
+const Client = { search, productos, pedido };
 export default Client;

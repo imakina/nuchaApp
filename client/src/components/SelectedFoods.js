@@ -14,6 +14,18 @@ export default function SelectedFoods(props) {
   ));
 
   return (
+    <div>
+    <table className="ui selectable structured large table">
+    <thead>
+      </thead>
+      <tbody>
+      <tr>
+        <td className="right aligned">
+          <button onClick={() => props.onPedidoClick()}>Confirmar Pedido</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
     <table className="ui selectable structured large table">
       <thead>
         <tr>
@@ -50,6 +62,7 @@ export default function SelectedFoods(props) {
         </tr>
       </tfoot>
     </table>
+    </div>
   );
 }
 
