@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import SelectedFoods from "./components/SelectedFoods";
-import FoodSearch from "./components/FoodSearch";
-import Layout from "./components/Layout";
-import Client from "./components/Client";
+import SelectedFoods from "../components/SelectedFoods";
+import FoodSearch from "../components/FoodSearch";
+import Client from "../components/Client";
 
-class App extends Component {
+class Products extends Component {
   state = {
     selectedFoods: []
   };
@@ -31,8 +30,7 @@ class App extends Component {
     const { selectedFoods } = this.state;
 
     return (
-      <Layout>
-        <div className="App">
+        <div className="Products">
           <div className="ui text container">
             <SelectedFoods
               foods={selectedFoods}
@@ -42,9 +40,8 @@ class App extends Component {
             <FoodSearch onFoodClick={this.addFood} />
           </div>
         </div>
-      </Layout>
     );
   }
 }
 
-export default App;
+export default Products;
