@@ -1,27 +1,34 @@
-const express = require("express");
-const fs = require("fs");
-const sqlite = require("sql.js");
-const mysql = require("mysql")
-const filebuffer = fs.readFileSync("db/usda-nnd.sqlite3");
+const express = require('express');
+const fs = require('fs');
+//const sqlite = require('sql.js');
+var bodyParser = require('body-parser');
+const mysql = require("mysql");
 
-
-const db = new sqlite.Database(filebuffer);
+//const db = new sqlite.Database(filebuffer);
 
 const app = express();
 
 app.set("port", process.env.PORT || 3001);
+// create application/json parser
+var jsonParser = bodyParser.json()
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-
 const connection = mysql.createConnection({
   host     : '192.168.10.10',
   user     : 'root',
   password : 'root',
   database : 'afsnextdb'
+});
+
+connection.connect((err) => {
+  if (err) throw err;
+  console.log('mySQL Connected!');
 });
 
 const COLUMNS = [
@@ -33,6 +40,7 @@ const COLUMNS = [
   "kcal",
   "description"
 ];
+
 app.get("/api/food", (req, res) => {
   const param = req.query.q;
 
@@ -88,11 +96,24 @@ app.get('/api/productos/search', (req,res) => {
 
 });
 
+app.post('/api/pedido', jsonParser,  (req,res) => {
+
+  if (!req.body) return res.sendStatus(400)
+
+  console.log(req.body)
+  
+  // connection.query(sqlquery, function (error, results, fields) {
+  //   if (error) throw error;
+  //   res.json(results);
+  // });
+
+  res.json("make it");
+
+});
 
 //api de pedidos
 app.get('/api/pedidos/insert', (req,res) => {
   
-
   const param = req.query.q;
   //pedidos
   var sqlquery = "INSERT INTO pedido (fecha_hora,vendedor_id,mail_cliente, aplicacion_id, total) VALUES ('2017-11-16 22:57:00',1,null,1,1223)"// '%"+param+"%'

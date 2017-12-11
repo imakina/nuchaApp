@@ -12,7 +12,7 @@ export default function SelectedFoods(props) {
   ))
 
   return (
-    <table className='ui selectable structured large table'>
+    <table className='ui selectable structured table'>
       <thead>
         <tr>
           <th colSpan='5'>
